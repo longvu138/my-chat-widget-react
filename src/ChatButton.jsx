@@ -79,9 +79,9 @@ const ChatButton = ({ initialConfig }) => {
 
   const renderChannel = (action) => {
     const iconMap = {
-      zalo: "/Zalo.png",
-      facebook: "/facebook.png",
-      hotline: "/hotline.svg",
+      zalo: "../src/resources/images/zalo.png",
+      facebook: "../src/resources/images/facebook.png",
+      hotline: "../src/resources/images/hotline.svg",
     };
 
     return (
