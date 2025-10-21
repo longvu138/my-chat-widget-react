@@ -20,7 +20,7 @@ function App() {
   };
 
   const wdId = {
-    widget_id: 'web_a_123'
+    widget_id: 'bbf7e002-2095-4c1b-a372-64f4b0d4d749'
   }
   
   return (

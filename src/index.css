@@ -67,6 +67,7 @@ button:focus-visible {
   }
 } */
 
+@import "tailwindcss";
 
 /* src/index.css — nếu bạn muốn tách CSS riêng */
 * {

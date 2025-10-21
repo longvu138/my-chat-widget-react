@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { appConfig } from "./appConfig";
 
 const ChatButton = ({ initialConfig }) => {
-
   const [config, setConfig] = useState(initialConfig);
 
   console.log("config", config);
-  
 
   const [loading, setLoading] = useState(true);
-  const [isPopupOpen, setIsPopupOpen] = useState(false); // 👈 Thêm state popup
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
     const fetchConfig = async () => {
       try {
-        const widgetId = initialConfig?.config_id;
-
+        const widgetId = initialConfig?.widget_id;
         console.log("🚀 Gửi widget_id:", widgetId);
 
         if (!widgetId) {
@@ -24,9 +22,9 @@ const ChatButton = ({ initialConfig }) => {
           return;
         }
 
-        const apiUrl = `http://localhost:3100/api/widget-configconfig_id=${encodeURIComponent(
-          widgetId
-        )}`;
+        const apiUrl = `${
+          appConfig.apiUrl
+        }/chatbots/channels/web-widget/config/${encodeURIComponent(widgetId)}`;
         console.log("🔗 Gọi API:", apiUrl);
 
         const response = await fetch(apiUrl);
@@ -53,7 +51,7 @@ const ChatButton = ({ initialConfig }) => {
     };
 
     fetchConfig();
-  }, [initialConfig?.config_id]);
+  }, [initialConfig?.widget_id]);
 
   const handleTogglePopup = () => {
     setIsPopupOpen(!isPopupOpen);
@@ -75,10 +73,10 @@ const ChatButton = ({ initialConfig }) => {
   // };
 
   // 👇 Ẩn nút nếu đang tải hoặc thiếu widget_id
-  if (!initialConfig?.config_id || loading) {
+  if (!initialConfig?.widget_id || loading) {
     return null;
   }
- 
+
   const renderChannel = (action) => {
     const iconMap = {
       zalo: "/Zalo.png",
@@ -96,17 +94,22 @@ const ChatButton = ({ initialConfig }) => {
           textDecoration: "none",
         }}
         href={
-          action?.channel === "hotline"
-            ? `tel:${action.text}`
-            : action?.channel === "zalo"
-            ? "#" // thay bằng link Zalo OA thật
-            : "#" // thay bằng link Messenger thật
+          action?.type === "hotline"
+            ? `tel:${action.value}`
+            : action?.type === "zalo"
+            ? "#"
+            : action?.type === "facebook"
+            ? `https://www.facebook.com/messages/t/${action?.value}`
+            : "#"
         }
+        target="_blank"
       >
-        <img src={iconMap[action?.channel]} className="size-8" alt="" />
-        {action.text && (
+        <img src={iconMap[action?.type]} className="size-6" alt="" />
+        {action.title && (
           <span className="text-base font-medium text-black">
-            {action.text}
+            {action?.type === "hotline"
+              ? `${action.title} ${action.value}`
+              : action.title}
           </span>
         )}
       </a>
@@ -140,7 +143,7 @@ const ChatButton = ({ initialConfig }) => {
           textTransform: "uppercase",
         }}
       >
-        {config.text || "Hỗ trợ"}
+        {config.buttonText || "Chat ngay"}
       </div>
 
       {/* Popup */}
@@ -198,20 +201,19 @@ const ChatButton = ({ initialConfig }) => {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                background: "#191E36",
+                background: config.color,
                 color: "white",
                 padding: "16px 18px",
                 borderRadius: "12px 12px 0 0",
               }}
             >
-              <div>{config.popupTitle}</div>
-              <button onClick={() => setIsPopupOpen(false)}>
-                {/* <FontAwesomeIcon
-                    className="cursor-pointer text-base"
-                    icon={faCircleMinus}
-                  /> */}
-                x
-              </button>
+              <div className="font-normal text-base">{config.title}</div>
+              <span
+                onClick={() => setIsPopupOpen(false)}
+                style={{ cursor: "pointer" }}
+              >
+                <img src={"/minus.svg"} className="size-5" alt="" />
+              </span>
             </div>
 
             {/* Nội dung */}
@@ -223,7 +225,7 @@ const ChatButton = ({ initialConfig }) => {
                 gap: "24px",
               }}
             >
-              {(config.popupActions || []).map((action, index) => (
+              {(config.contactLinks || []).map((action, index) => (
                 <React.Fragment key={index}>
                   {renderChannel(action)}
                 </React.Fragment>
