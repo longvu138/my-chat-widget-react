@@ -65,15 +65,21 @@ app.use(express.json()); // 👈 hỗ trợ POST nếu cần sau này
 // CSDL mẫu — thực tế sẽ dùng MongoDB/PostgreSQL...
 const widgetConfigs = {
   web_a_123: {
-    text: "Chat ngay",
-    color: "#191E36",
-    position: "bottom-right",
-    popupTitle: "LIÊN HỆ ĐỂ ĐƯỢC TƯ VẤN",
-    popupActions: [
-      { text: "0999 999 999", channel: "hotline" },
-      { text: "Nhắn Zalo", channel: "zalo" },
-      { text: "Nhắn Messenger", channel: "facebook" },
+    title: "LIÊN HỆ ĐỂ ĐƯỢC TƯ VẤN",
+    contactLinks: [
+      {
+        title: "Gọi",
+        type: "hotline",
+        value: "0708666345",
+      },
+      {
+        title: "Nhắn Messenger",
+        type: "facebook",
+        value: "764859730045701",
+      },
     ],
+    color: "#d31414",
+    buttonText: "CHAT NGAY",
   },
   web_b_456: {
     text: "Hỗ trợ Website B",

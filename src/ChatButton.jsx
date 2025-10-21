@@ -104,9 +104,13 @@ const ChatButton = ({ initialConfig }) => {
         }
         target="_blank"
       >
-        <img src={iconMap[action?.type]} className="size-6" alt="" />
+        <img
+          src={iconMap[action?.type]}
+          style={{ width: "24px", maxHeight: "24px", maxWidth: "24px" }}
+          alt=""
+        />
         {action.title && (
-          <span className="text-base font-medium text-black">
+          <span style={{ color: "black", fontSize: "1rem", fontWeight: "500" }}>
             {action?.type === "hotline"
               ? `${action.title} ${action.value}`
               : action.title}
@@ -212,7 +216,11 @@ const ChatButton = ({ initialConfig }) => {
                 onClick={() => setIsPopupOpen(false)}
                 style={{ cursor: "pointer" }}
               >
-                <img src={"/minus.svg"} className="size-5" alt="" />
+                <img
+                  src={"../src/resources/images/minus.svg"}
+                  style={{ width: "20px", height: "20px" }}
+                  alt=""
+                />
               </span>
             </div>
 
