@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { appConfig } from "./appConfig";
+import minusIcon from "./resources/images/minus.svg";
+import zalo from "./resources/images/zalo.png";
+import zalo from "./resources/images/facebook.png";
+import hotline from "./resources/images/hotline.svg";
 
 const ChatButton = ({ initialConfig }) => {
   const [config, setConfig] = useState(initialConfig);
@@ -79,9 +83,9 @@ const ChatButton = ({ initialConfig }) => {
 
   const renderChannel = (action) => {
     const iconMap = {
-      zalo: "../src/resources/images/zalo.png",
-      facebook: "../src/resources/images/facebook.png",
-      hotline: "../src/resources/images/hotline.svg",
+      zalo: zalo,
+      facebook: facebook,
+      hotline: hotline,
     };
     console.log("action", action);
 
@@ -217,7 +221,8 @@ const ChatButton = ({ initialConfig }) => {
                 style={{ cursor: "pointer" }}
               >
                 <img
-                  src={"../src/resources/images/minus.svg"}
+                  // src={"../src/resources/images/minus.svg"}
+                  src={minusIcon}
                   style={{ width: "20px", height: "20px" }}
                   alt=""
                 />
