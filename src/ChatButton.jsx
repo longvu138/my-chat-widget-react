@@ -83,6 +83,7 @@ const ChatButton = ({ initialConfig }) => {
       facebook: "../src/resources/images/facebook.png",
       hotline: "../src/resources/images/hotline.svg",
     };
+    console.log("action", action);
 
     return (
       <a
@@ -97,7 +98,7 @@ const ChatButton = ({ initialConfig }) => {
           action?.type === "hotline"
             ? `tel:${action.value}`
             : action?.type === "zalo"
-            ? "#"
+            ? `https://zalo.me/${action.value}`
             : action?.type === "facebook"
             ? `https://www.facebook.com/messages/t/${action?.value}`
             : "#"
@@ -189,8 +190,7 @@ const ChatButton = ({ initialConfig }) => {
               style={{
                 position: "absolute",
                 bottom: "-12px",
-                left: config.position === "bottom-left" ? "40px" : "auto",
-                right: config.position === "bottom-right" ? "40px" : "auto",
+                right: "48px",
                 width: 0,
                 height: 0,
                 borderLeft: "8px solid transparent",

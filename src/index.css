@@ -72,6 +72,7 @@ button:focus-visible {
 /* src/index.css — nếu bạn muốn tách CSS riêng */
 * {
   box-sizing: border-box;
+  /* font-family: Arial, sans-serif; */
 }
 
 #my-chat-widget-root {
