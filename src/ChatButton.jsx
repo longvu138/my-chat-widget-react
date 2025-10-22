@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { appConfig } from "./appConfig";
 import minusIcon from "./resources/images/minus.svg";
 import zalo from "./resources/images/zalo.png";
-import zalo from "./resources/images/facebook.png";
+import facebook from "./resources/images/facebook.png";
 import hotline from "./resources/images/hotline.svg";
 
 const ChatButton = ({ initialConfig }) => {
