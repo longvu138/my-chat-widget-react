@@ -25,7 +25,7 @@ jobs:
         run: npm ci
      
       - name: Touch env
-        run: touch .env && cat .env.dev.sample > .env
+        run: touch .env && cat .env.prod.sample > .env
 
       - name: Build Vite app
         run: npm run build
