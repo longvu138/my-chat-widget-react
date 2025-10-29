@@ -1,4 +1,4 @@
-name: Deploy Vite App to Cloudflare Pages Prod
+name: Deploy Vite App to Cloudflare Pages Dev
 
 on:
   workflow_dispatch:
@@ -25,7 +25,7 @@ jobs:
         run: npm ci
      
       - name: Touch env
-        run: touch .env && cat .env.prod.sample > .env
+        run: touch .env && cat .env.dev.sample > .env
 
       - name: Build Vite app
         run: npm run build
@@ -35,6 +35,6 @@ jobs:
         run: npm install -g wrangler
 
       - name: Deploy to Cloudflare Pages
-        run: wrangler pages deploy ./dist --project-name=chat-widget
+        run: wrangler pages deploy ./dist --project-name=chat-widget-dev
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
